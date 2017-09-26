@@ -1,6 +1,8 @@
 const expect = require('chai').expect;
 const { Page } = require('../models');
 
+
+
 describe('Page model', function () {
     describe('Virtuals', function () {
       let page;
@@ -24,9 +26,39 @@ describe('Page model', function () {
     });
 
     describe('Class methods', function () {
+      before(function (done) {
+
+        // delete table and recreate with our new schema
+        Page.sync({force: true})
+        .then(function(){
+          return Page.create({
+            title: 'foo',
+            content: 'bar',
+            tags: ['foo', 'bar']
+          })
+        })
+        .then(function () {
+          done();
+        })
+        .catch(done);
+      });
       describe('findByTag', function () {
-        it('gets pages with the search tag');
-        it('does not get pages without the search tag');
+        it('gets pages with the search tag', function(done) {
+          Page.findByTag('bar')
+            .then(function(pages) {
+              expect(pages).to.have.lengthOf(1);
+              done();
+            })
+            .catch(done)
+        });
+        it('does not get pages without the search tag', function(done) {
+          Page.findByTag('hello')
+            .then(function(pages){
+              expect(pages).to.have.lengthOf(0);
+              done();
+            })
+            .catch(done)
+        });
       });
     });
 
