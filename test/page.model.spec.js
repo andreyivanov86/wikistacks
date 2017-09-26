@@ -84,20 +84,17 @@ describe('Page model', function () {
           content: 'bar',
           tags: ['hello']
         });
-        // page1.save();
-        // page2.save();
-        // page3.save();
       });   
 
       describe('findSimilar', function () {
         it('never gets itself', function() {
           expect(page1.findSimilar).should.not.include(page1);
         });
-        it('gets other pages with any common tags', function(){
-
+        it('gets other pages with any common tags', function() {
+          
         });
         it('does not get other pages without any common tags', function(){
-
+        
         });
       });
     });
@@ -109,16 +106,23 @@ describe('Page model', function () {
       });
       it('errors without title', function(done){
         page.validate() // return a valid page
-        .then( function () { done(); })
         .catch(function(err){
           expect(err).to.exist;
           expect(err.errors).to.exist;
           expect(err.errors[0].path).to.equal('title');
           done();
-          console.log('Error');
         })
       });
-      it('errors without content');
+      it('errors without content', function(done){
+        page.validate() // return a valid page
+        .catch(function(err){
+          expect(err).to.exist;
+          expect(err.errors).to.exist;
+          expect(err.errors[1].path).to.equal('content');
+          console.log(err.errors[2])
+          done();
+        })
+      });
       it('errors given an invalid status');
     });
 
