@@ -2,10 +2,18 @@ const expect = require('chai').expect;
 const Page = require('../models');
 
 describe('Page model', function () {
+    let page;
+    beforeEach(function(){
+      page = Page.build();
+    })
 
     describe('Virtuals', function () {
       describe('route', function () {
-        it('returns the url_name prepended by "/wiki/"');
+        it('returns the url_name prepended by "/wiki/"', function(){
+          page.urlTitle = 'javascript';
+          expect(page.urlTitle).to.eql('/wiki/javascript');
+        });
+
       });
       describe('renderedContent', function () {
         it('converts the markdown-formatted content into HTML');
