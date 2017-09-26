@@ -1,22 +1,25 @@
 const expect = require('chai').expect;
-const Page = require('../models');
+const { Page } = require('../models');
 
 describe('Page model', function () {
-    let page;
-    beforeEach(function(){
-      page = Page.build();
-    })
-
     describe('Virtuals', function () {
+      let page;
+      beforeEach(function(){
+        page = Page.build();
+      });
       describe('route', function () {
         it('returns the url_name prepended by "/wiki/"', function(){
-          page.urlTitle = 'javascript';
-          expect(page.urlTitle).to.eql('/wiki/javascript');
+          page.urlTitle = 'some_title';
+          expect(page.route).to.eql('/wiki/some_title');
         });
 
       });
       describe('renderedContent', function () {
-        it('converts the markdown-formatted content into HTML');
+        it('converts the markdown-formatted content into HTML', function(){
+          page.content = 'Markdown';
+          expect(page.renderedContent).to.eql('<p>Markdown</p>\n');
+
+        });
       });
     });
 
