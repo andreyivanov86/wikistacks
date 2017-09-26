@@ -1,0 +1,25 @@
+{
+  "name": "wikistacks-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.15.5",
+    "marked": "^0.3.6",
+    "morgan": "^1.8.2",
+    "nunjucks": "^3.0.1",
+    "nunjucks-autoescape": "^1.0.1",
+    "pg": "^6.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.10.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
